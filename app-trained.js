@@ -17,12 +17,18 @@ const userInterface = readline.createInterface({
 userInterface.prompt();
 
 userInterface.on("line", async (input) => {
-  const res = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: input }],
-  });
+  // const res = await openai.createChatCompletion({
+  //     model: "gpt-3.5-turbo",
+  //     messages: [{ role: "user", content: input }],
+  // });
   
   // Log only useful information
-  console.log(res.data.choices[0].message.content);
+  // console.log(res.data.choices[0].message.content);
 
+  const res = await openai.createCompletion({
+    model: "davinci:ft-personal-2023-07-04-21-35-36",
+    prompt: input,
+    max_tokens: 200,
+  });
+  console.log(res.data.choices[0].text);
 });
